@@ -111,7 +111,7 @@ alias la='ls -a'
 alias ll='ls -l'
 alias vimrc='pushd ~/.vim/'
 #alias poetry='poetry@1.1.15'
-#
+
 #Auto Open TMUX
 if [ "$TMUX" = "" ]; then exec tmux; fi
 
@@ -129,7 +129,75 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="/opt/homebrew/opt/python@2/libexec/bin:$PATH"
 
+# Pyspark
+export SPARK_HOME=/usr/local/Cellar/apache-spark/2.4.4/libexec
+export PYTHONPATH=/usr/local/Cellar/apache-spark/2.4.4/libexec/python/:$PYTHONP$
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/ebeckwith/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ebeckwith/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/ebeckwith/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ebeckwith/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+alias work="cd ~/Documents/work/data"
+alias sbi="cd ~/Documents/work/data/services/service-batch-ingestion"
+alias dbt="cd ~/Documents/work/data/dbt/service-dbt-aggregations"
+alias scripts="cd ~/Documents/work/data/scripts"
+alias zshrc="vim ~/.zshrc"
+alias szsh="source ~/.zshrc"
+alias dep="arch -x86_64"
+alias hive="arch -x86_64 hive"
+
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+#add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
+# rosetta terminal setup
+if [ $(arch) = "i386" ]; then
+    alias brew="/usr/local/bin/brew"
+    alias pyenv="/usr/local/bin/pyenv"
+
+    # export CPPFLAGS="-I$(brew86 --prefix libffi)/include -I$(brew86 --prefix openssl)/include -I$(brew86 --prefix readline)/lib"
+    # export CFLAGS="-I$(brew86 --prefix openssl)/include -I$(brew86 --prefix bzip2)/include -I$(brew86 --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include -Wno-implicit-function-declaration" 
+    # export LDFLAGS="-L$(brew86 --prefix openssl)/lib -L$(brew86 --prefix readline)/lib -L$(brew86 --prefix zlib)/lib -L$(brew86 --prefix bzip2)/lib -L$(brew86 --prefix gettext)/lib -L$(brew86 --prefix libffi)/lib"
+    # export PYTHON_BUILD_HOMEBREW_OPENSSL_FORMULA=openssl@1.0
+
+fi
+
+function intel(){
+  arch -x86_64 /usr/local/bin/zsh
+}
+alias brew86="arch -x86_64 /usr/local/bin/brew"
+export PATH=/opt/homebrew/bin:$PATH
+# Allow Ctrl-z to toggle between suspend and resume 
+function Resume {  
+    fg
+    zle push-input 
+    BUFFER=""
+    zle accept-line
+} 
+zle -N Resume
+bindkey "^Z" Resume
