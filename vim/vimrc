@@ -1,7 +1,7 @@
 source ~/.vim/general_settings.vimrc
 source ~/.vim/plugins.vimrc
 source ~/.vim/functions.vimrc
-source ~/.vim/autocomplete_brackets.vimrc
+""source ~/.vim/autocomplete_brackets.vimrc
 source ~/.vim/plugin_settings.vimrc
 if has("autocmd")
 	  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
@@ -17,7 +17,8 @@ if has('autocmd')
 endif
 
 " --- Color Scheme and Looks --- "
-colorscheme molokai
+colorscheme gruvbox
+set bg=dark
 set splitright
 
 "let g:solarized_termcolors=256

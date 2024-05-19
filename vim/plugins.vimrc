@@ -1,17 +1,21 @@
 " --- Setup Vundle and Plugins --- "
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin()
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'ervandew/supertab'
-Plugin 'airblade/vim-gitgutter'
-""Plugin 'neoclide/coc.nvim'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'tpope/vim-fugitive'
-Plugin 'junegunn/gv.vim'
+Plug 'bling/vim-airline'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'airblade/vim-gitgutter'
+Plug 'morhetz/gruvbox'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
+Plug 'junegunn/gv.vim'
+Plug 'wellle/context.vim'
+Plug 'dyng/ctrlsf.vim'
+""Plug 'xolox/vim-session'
+""Plug 'gmarik/Vundle.vim'
+""Plug 'altercation/vim-colors-solarized'
+""Plug 'ervandew/supertab'
 
-call vundle#end()
+call plug#end()

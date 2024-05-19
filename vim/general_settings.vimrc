@@ -35,7 +35,7 @@ map <leader>r <C-w><C-r>
 
 " --- General Settings --- "
 set hidden
-set nowrap        " don't wrap lines
+"set nowrap        " don't wrap lines
 set tabstop=4     " a tab is four spaces
 set backspace=indent,eol,start
                     " allow backspacing over everything in insert mode
@@ -64,6 +64,7 @@ set nobackup
 set noswapfile
 set modelines=0
 set relativenumber
+set expandtab
 
 " Turn on mouse selecting so that you can use mouse to move cursor
 set mouse=a
